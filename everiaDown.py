@@ -51,3 +51,8 @@ if __name__ == '__main__':
         thread = threading.Thread(target=download_file, args=(uri[0],path+file_name))
         thread.start()
         threads.append(thread)
+    for thread in threads:
+        if threading.active_count() >= 30:
+            print('wait for a second')
+            time.sleep(1)
+        thread.join()
